@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+
+int main()
+{
+    //assigning int data type to change so the end product is an integer although float is allowed in the calculation
+    int change;
+    int x;
+
+    do
+    {
+        //Prompt user to enter change amount, cannot be negative
+        //get_float allows user to enter float numbers
+        change = round(get_float("Enter change amount: ") * 100);
+    }
+    while (change < 0);
+
+    //Set x=0. "x" will contain the number of coins needed for the value in "change"
+    x = 0;
+
+    while (change > 0)
+    {
+        //Check for the biggest amount of change first, 25 cents
+        if (change >= 25)
+        {
+            change = change - 25;
+            x = x + 1;
+        }
+
+        //If smaller than 25 cents, check for next biggest amount of change
+        else if (change >= 10)
+        {
+            change = change - 10;
+            x = x + 1;
+        }
+
+        //If smaller than 10 cents, check for next biggest amount of change
+        else if (change >= 5)
+        {
+            change = change - 5;
+            x = x + 1;
+        }
+
+        //If smaller than 5 cents, check for next biggest amount of change
+        //This time its the last check because we reach the penny
+        else
+        {
+            change = change - 1;
+            x = x + 1;
+        }
+    }
+    //print the value of "x" to show the number of coins needed
+    printf("Number of coins needed: %d\n", x);
+}
